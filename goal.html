@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#21102f">
+<title>FREE TIME GAMES | Retro Arcade</title>
+<style>
+:root{--bg:#170d22;--panel:#281638;--pink:#ff4fa3;--yellow:#ffe66d;--text:#fff8fd;--muted:#cbb8d5;--line:#59336b}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:radial-gradient(circle at 15% 10%,#3b1c50 0,transparent 28%),radial-gradient(circle at 90% 35%,#351b46 0,transparent 30%),var(--bg);color:var(--text)}
+button,input{font:inherit}
+a{color:inherit;text-decoration:none}
+header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 7%;background:rgba(27,13,39,.96);border-bottom:2px solid var(--pink);position:sticky;top:0;z-index:10;box-shadow:0 5px 24px #0005}
+.logo{font-size:24px;font-weight:900;color:var(--yellow);letter-spacing:1.5px;text-shadow:0 0 15px #ffe66d55}
+nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+nav a{color:#f4dff8;font-size:14px}
+nav a:hover{color:var(--yellow)}
+.btn{display:inline-block;border:0;padding:12px 19px;border-radius:9px;background:linear-gradient(110deg,var(--pink),#a64dff);color:white;font-weight:bold;cursor:pointer;transition:.2s;box-shadow:0 5px 18px #ff4fa344}
+.btn:hover{filter:brightness(1.12);transform:translateY(-2px);box-shadow:0 8px 24px #ff4fa366}
+.secondary{background:#392149;border:1px solid #70488a}
+section{padding:60px 7%}
+.hero{min-height:420px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(135deg,#3a174cdd,#1b1029dd),repeating-linear-gradient(45deg,#ffffff08 0 2px,transparent 2px 14px);border-bottom:1px solid #75418b}
+.hero h1{font-size:clamp(38px,7vw,72px);margin-bottom:15px;text-shadow:0 5px 24px #0008}
+.hero h1 span{color:var(--yellow)}
+.hero p{color:#ead9f1;max-width:600px;line-height:1.7}
+.hero .btn{margin-top:25px}
+.section-title{font-size:29px;margin-bottom:10px;color:#fff1fa}
+.subtitle{color:var(--muted);margin-bottom:28px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;background:#21112e;padding:28px 7%;border-bottom:1px solid #48275a}
+.stat{text-align:center;padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.stat h2{color:var(--yellow);font-size:27px}
+.stat p{color:var(--muted);margin-top:5px}
+.games-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.game-card{background:linear-gradient(145deg,#2e1940,#21132e);border:1px solid #59336b;border-radius:14px;overflow:hidden;transition:.25s;box-shadow:0 8px 22px #0003}
+.game-card:hover{transform:translateY(-5px);border-color:var(--pink);box-shadow:0 12px 28px #ff4fa322}
+.game-art{height:155px;display:flex;justify-content:center;align-items:center;font-size:65px;background:linear-gradient(135deg,#71366f,#3c286a)}
+.game-info{padding:18px}
+.game-info h3{margin-bottom:9px}
+.game-info p{color:var(--muted);font-size:13px;line-height:1.5;margin:10px 0 15px}
+.tag{display:inline-block;color:var(--yellow);font-size:11px;padding:5px 8px;background:#4a2a52;border-radius:5px;margin-bottom:12px}
+#leaderboard{background:#21112e;border-top:1px solid #48275a;border-bottom:1px solid #48275a}
+.score-table{width:100%;border-collapse:collapse;margin-top:20px;background:var(--panel);border-radius:12px;overflow:hidden}
+.score-table th,.score-table td{padding:16px;text-align:left;border-bottom:1px solid #493057}
+.score-table th{color:var(--yellow)}
+.score-table td{color:#f4e8f7}
+.rank{color:var(--pink)!important;font-weight:bold}
+.youtube-panel{max-width:720px;margin:0 auto;padding:32px;text-align:center;background:linear-gradient(145deg,#351a48,#241331);border:1px solid #71417f;border-radius:18px;box-shadow:0 12px 32px #0004}
+.youtube-panel p{color:var(--muted);line-height:1.6;margin:0 auto 22px;max-width:520px}
+.youtube-button{background:linear-gradient(110deg,#ff3155,#d71970);font-size:16px;padding:15px 28px;border-radius:999px}
+.ad-space{border:2px dashed #704b7e;min-height:100px;display:flex;align-items:center;justify-content:center;color:#c6afcf;text-align:center;border-radius:10px;margin:20px 0;padding:15px;background:#241431}
+.ad-label{font-size:11px;color:#b69ac2;margin-bottom:8px;letter-spacing:2px;font-weight:800}
+.ad-section{max-width:1100px;margin:0 auto;padding:0 7%}.ad-banner{min-height:120px;border-style:dashed}.ad-banner small{color:#a98bb7;font-size:12px}\nfooter{padding:35px 7%;background:#100918;color:#bda9c7;text-align:center;line-height:2}
+footer strong{color:var(--yellow)}
+@media(max-width:800px){header{flex-direction:column}nav{justify-content:center}.games-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:550px){.games-grid,.stats{grid-template-columns:1fr}nav{gap:10px}nav a{font-size:12px}.score-table th,.score-table td{padding:10px 6px;font-size:12px}.youtube-panel{padding:24px 16px}}
+
+.guess-panel{max-width:950px;margin:0 auto;padding:26px;background:linear-gradient(145deg,#321943,#20102d);border:1px solid #8a4d9a;border-radius:18px;box-shadow:0 12px 32px #0005}
+.guess-controls{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}
+.guess-controls button{flex:1;min-width:140px}
+.guess-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--yellow);font-weight:bold;margin:18px 0}
+.guess-clue{padding:24px 18px;border-radius:14px;background:#170d22;border:1px solid #684078;text-align:center;margin:15px 0}
+.guess-clue .player-icon{font-size:48px;margin-bottom:10px}
+.guess-clue h3{font-size:clamp(20px,4vw,28px);margin-bottom:8px}
+.guess-clue p{color:var(--muted);line-height:1.6}
+.guess-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+.guess-option{padding:14px;border:1px solid #75458a;background:#392149;color:white;border-radius:10px;font-weight:bold;cursor:pointer;text-align:left}
+.guess-option:hover:not(:disabled){border-color:var(--yellow);background:#51305f}
+.guess-option:disabled{cursor:default;opacity:.85}
+.guess-option.correct{background:#17613d;border-color:#42d98b}
+.guess-option.wrong{background:#762b43;border-color:#ff668c}
+#guessFeedback{min-height:28px;margin-top:15px;font-weight:bold;line-height:1.5}
+#guessNext{margin-top:12px}
+.guess-note{font-size:12px;color:#bda9c7;line-height:1.6;margin-top:16px}
+@media(max-width:550px){.guess-options{grid-template-columns:1fr}.guess-panel{padding:18px}}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">FREE TIME <span style="color:white">GAMES</span></div>
+  <nav>
+    <a href="#home">Home</a><a href="#games">Games</a><a href="#guess-player">Guess Player</a><a href="#leaderboard">Scores</a>
+    <a href="#youtube">YouTube</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h1>ENTER THE <span>GAME ZONE</span></h1>
+  <p>Play 15 free games, watch gaming videos and climb the leaderboard. Your gaming journey starts here.</p>
+  <a href="#games" class="btn">EXPLORE GAMES →</a>
+</section>
+
+<div class="stats">
+  <div class="stat"><h2 id="gameCount">0</h2><p>Free Games</p></div>
+  <div class="stat"><h2 id="playerCount">0</h2><p>Players on this browser</p></div>
+  <div class="stat"><h2 id="topScore">0</h2><p>Highest Recorded Score</p></div>
+</div>
+
+<section aria-label="Advertisement">
+  <div class="ad-space"><div><div class="ad-label">ADVERTISEMENT</div><p>Your advertisement can appear here. Add your approved ad-network code to activate this space.</p></div></div>
+</section>
+
+<section id="games">
+  <h2 class="section-title">🎮 GAME LIBRARY</h2><p class="subtitle">All 15 games are free to play. Choose your next challenge.</p>
+  <div class="games-grid" id="gamesContainer"></div>
+</section>
+
+
+
+<section id="guess-player">
+  <h2 class="section-title">🌍 GUESS THE PLAYER</h2>
+  <p class="subtitle">Test your sports knowledge with football and cricket stars from countries around the world.</p>
+  <div class="guess-panel">
+    <div class="guess-controls" aria-label="Choose a sport">
+      <button class="btn" id="footballMode" type="button">⚽ FOOTBALL</button>
+      <button class="btn secondary" id="cricketMode" type="button">🏏 CRICKET</button>
+      <button class="btn secondary" id="mixedMode" type="button">🌍 MIX BOTH</button>
+    </div>
+    <div class="guess-meta">
+      <span id="guessRound">Question 1</span>
+      <span id="guessScore">Score: 0</span>
+      <span id="guessStreak">Streak: 0</span>
+    </div>
+    <div class="guess-clue">
+      <div class="player-icon" id="guessIcon">🏆</div>
+      <h3 id="guessPrompt">Who is this player?</h3>
+      <p id="guessClue">Choose a sport above to begin.</p>
+      <p id="guessCountry" style="margin-top:10px;color:var(--yellow)"></p>
+    </div>
+    <div class="guess-options" id="guessOptions"></div>
+    <p id="guessFeedback" role="status" aria-live="polite"></p>
+    <button class="btn" id="guessNext" type="button" hidden>NEXT QUESTION →</button>
+    <button class="btn secondary" id="guessRestart" type="button">RESTART QUIZ</button>
+    <p class="guess-note">This is a curated quiz of well-known international players, not a complete database of every professional or local player. The player pool includes stars from many football and cricket nations; more names can be added to the list in the page code.</p>
+  </div>
+</section>
+
+<section class="ad-section" aria-label="Advertisement">
+  <div class="ad-space ad-banner">
+    <div>
+      <div class="ad-label">ADVERTISEMENT</div>
+      <p>In-feed advertisement placement</p>
+      <small>Replace this placeholder with your approved ad-network ad unit.</small>
+    </div>
+  </div>
+</section>
+
+<section id="leaderboard">
+  <h2 class="section-title">🏆 TOP PLAYERS</h2>
+  <p class="subtitle">Demo leaderboard saved in this browser only.</p>
+  <table class="score-table">
+    <thead><tr><th>Rank</th><th>Player</th><th>Game</th><th>Score</th></tr></thead>
+    <tbody id="leaderboardBody"></tbody>
+  </table>
+  <div class="member-box" style="margin-top:25px">
+    <h3>Submit Your Game Score</h3>
+    <input id="scoreName" placeholder="Player name" maxlength="25">
+    <input id="scoreGame" placeholder="Game name" maxlength="40">
+    <input id="scoreValue" type="number" min="0" step="1" placeholder="Your score">
+    <button class="btn" id="submitScoreButton">SUBMIT SCORE</button>
+    <p id="scoreMessage" role="status" style="margin-top:12px"></p>
+  </div>
+</section>
+
+<section id="youtube">
+  <h2 class="section-title">▶️ YOUTUBE</h2>
+  <div class="youtube-panel">
+    <p>Want to watch gaming videos, walkthroughs and tutorials? Open YouTube in a fresh browser tab whenever you press the button.</p>
+    <a class="btn youtube-button" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">▶ OPEN YOUTUBE</a>
+  </div>
+</section>
+
+<section><div class="ad-space"><div><div class="ad-label">ADVERTISEMENT</div><p>Advertisement placement — connect your ad network or add a sponsor banner here.</p></div></div></section>
+<footer><strong>FREE TIME GAMES</strong><br>Play. Compete. Win.<br>© 2026 Free Time Games. All rights reserved.</footer>
+
+<script>
+// ADD GAMES HERE. access must be exactly "Free", "Pro", or "Elite".
+const games = [
+{name:"Fruit Ninja",icon:"🍉",category:"ARCADE",description:"Slice fruit and test your reflexes.",url:"https://poki.com/en/g/fruit-ninja"},
+{name:"Mr Racer: Car Racing",icon:"🏎️",category:"RACING",description:"Race through traffic and beat your rivals.",url:"https://poki.com/en/g/mr-racer-car-racing"},
+{name:"Blockpost",icon:"🎯",category:"ACTION",description:"Enter a block-style shooting arena.",url:"https://poki.com/en/g/blockpost"},
+{name:"Drive Mad",icon:"🚙",category:"RACING",description:"Drive tricky vehicles across challenging tracks.",url:"https://poki.com/en/g/drive-mad"},
+{name:"Hills of Steel",icon:"🛡️",category:"ACTION",description:"Battle across hills in powerful tanks.",url:"https://poki.com/en/g/hills-of-steel"},
+{name:"Dasi Office Manager",icon:"🏢",category:"SIMULATION",description:"Manage your office and complete business tasks.",url:"https://poki.com/en/g/dasi-office-manager"},
+{name:"Level Devil",icon:"😈",category:"PLATFORM",description:"Avoid sneaky traps in this tricky platform game.",url:"https://poki.com/en/g/level-devil"},
+{name:"Blockpost 2.0",icon:"🔫",category:"ACTION",description:"Jump into a block-style shooter challenge.",url:"https://poki.com/en/g/blockpost-2-0"},
+{name:"Temple Run",icon:"🏃",category:"RUNNER",description:"Run, jump and dodge obstacles while escaping.",url:"https://poki.com/en/g/temple-run"},
+{name:"Idle Lumber Inc",icon:"🪵",category:"IDLE",description:"Build and grow your own lumber business.",url:"https://poki.com/en/g/idle-lumber-inc"},
+{name:"Country Balls: World War",icon:"🌍",category:"STRATEGY",description:"Lead country balls through a strategy battle.",url:"https://poki.com/en/g/country-balls-world-war"},
+{name:"Karate Fighter",icon:"🥋",category:"FIGHTING",description:"Fight opponents with karate skills and timing.",url:"https://poki.com/en/g/karate-fighter"},
+{name:"Stickman Dragon Fight",icon:"🐉",category:"FIGHTING",description:"Battle powerful enemies as a stickman fighter.",url:"https://poki.com/en/g/stickman-dragon-fight"},
+{name:"Dan the Man",icon:"🥊",category:"ACTION",description:"Fight your way through action-packed levels.",url:"https://poki.com/en/g/dan-the-man"},
+{name:"Hill Climb Racing Lite",icon:"🚗",category:"RACING",description:"Drive uphill, balance your vehicle and collect rewards.",url:"https://games.poki.com/458768/1900a95d-1c74-49c8-b752-b88fe2e67501?tag=pg-e0e81ddaee8b372d6f03bbcdb84aa36cbdbf7721&site_id=3&iso_lang=en&country=IN&poki_url=https://poki.com/en/g/hill-climb-racing-lite&hoist=yes&nonPersonalized=n&cloudsavegames=n&familyFriendly=n&device=desktop&categories=1,9,78,893,929,1140,1190&user_id=avyQU6eqmzzwZNEodgEeQA"}
+];
+
+const safeGet = (key,fallback) => {
+  try { const value=localStorage.getItem(key); return value===null?fallback:value; }
+  catch(error) { return fallback; }
+};
+const safeSet = (key,value) => {
+  try { localStorage.setItem(key,value); return true; }
+  catch(error) { alert("Browser storage is unavailable. Your changes may not be saved."); return false; }
+};
+let currentUser=safeGet("ftgUser","");
+
+let scores=[];
+try {
+  const saved=JSON.parse(safeGet("ftgScores","[]"));
+  scores=Array.isArray(saved)?saved.filter(s=>s && typeof s.name==="string" && typeof s.game==="string" && Number.isFinite(s.score)):[];
+} catch(error) { scores=[]; }
+
+function renderGames(){
+  const container=document.getElementById("gamesContainer");
+  container.replaceChildren();
+  games.forEach(game=>{
+    const card=document.createElement("article"); card.className="game-card";
+    const art=document.createElement("div"); art.className="game-art"; art.textContent=game.icon||"🎮";
+    const info=document.createElement("div"); info.className="game-info";
+    const tag=document.createElement("span"); tag.className="tag"; tag.textContent=game.category;
+    const title=document.createElement("h3"); title.textContent=game.name;
+    const desc=document.createElement("p"); desc.textContent=game.description||"Play now.";
+    const button=document.createElement("button"); button.className="btn"; button.style.width="100%";
+    button.textContent="PLAY NOW";
+    button.addEventListener("click",()=>{
+      if(!game.url){alert("This game does not have a URL yet.");return;}
+      try {
+        const parsed=new URL(game.url);
+        if(!["https:","http:"].includes(parsed.protocol)){alert("Invalid game URL.");return;}
+        window.open(parsed.href,"_blank","noopener,noreferrer");
+      } catch(error){alert("Please enter a valid game URL.");}
+    });
+    info.append(tag,title,desc,button); card.append(art,info); container.append(card);
+  });
+  document.getElementById("gameCount").textContent=games.length + 1;
+}
+
+// GUESS THE PLAYER quiz: curated international football and cricket players.
+const sportsPlayers = [
+  // Football
+  {sport:"football",name:"Lionel Messi",country:"Argentina",clue:"Argentine forward, eight-time Ballon d'Or winner and 2022 FIFA World Cup champion.",icon:"🇦🇷"},
+  {sport:"football",name:"Cristiano Ronaldo",country:"Portugal",clue:"Portuguese superstar known for his goal-scoring records and the famous 'Siuuu' celebration.",icon:"🇵🇹"},
+  {sport:"football",name:"Neymar Jr",country:"Brazil",clue:"Brazilian attacker famous for his flair, skills and time at Barcelona and Paris Saint-Germain.",icon:"🇧🇷"},
+  {sport:"football",name:"Kylian Mbappé",country:"France",clue:"French forward who won the 2018 World Cup and scored a hat-trick in the 2022 final.",icon:"🇫🇷"},
+  {sport:"football",name:"Erling Haaland",country:"Norway",clue:"Norwegian striker known for extraordinary pace, power and scoring goals for Manchester City.",icon:"🇳🇴"},
+  {sport:"football",name:"Mohamed Salah",country:"Egypt",clue:"Egyptian winger and Liverpool star nicknamed the Egyptian King.",icon:"🇪🇬"},
+  {sport:"football",name:"Son Heung-min",country:"South Korea",clue:"South Korean forward who captained Tottenham Hotspur and is known for two-footed finishing.",icon:"🇰🇷"},
+  {sport:"football",name:"Luka Modrić",country:"Croatia",clue:"Croatian midfielder who won the 2018 Ballon d'Or and led his country to the World Cup final.",icon:"🇭🇷"},
+  {sport:"football",name:"Kevin De Bruyne",country:"Belgium",clue:"Belgian midfielder famous for precise passing and creating chances at Manchester City.",icon:"🇧🇪"},
+  {sport:"football",name:"Harry Kane",country:"England",clue:"English striker and captain who became his country's all-time leading men's scorer.",icon:"🏴"},
+  {sport:"football",name:"Virgil van Dijk",country:"Netherlands",clue:"Dutch centre-back known for his leadership and defensive performances for Liverpool.",icon:"🇳🇱"},
+  {sport:"football",name:"Robert Lewandowski",country:"Poland",clue:"Polish striker who starred for Bayern Munich and Barcelona.",icon:"🇵🇱"},
+  {sport:"football",name:"Sadio Mané",country:"Senegal",clue:"Senegalese forward who helped his country win the Africa Cup of Nations in 2021.",icon:"🇸🇳"},
+  {sport:"football",name:"Achraf Hakimi",country:"Morocco",clue:"Moroccan right-back who helped his country reach the 2022 World Cup semi-finals.",icon:"🇲🇦"},
+  {sport:"football",name:"Andrés Iniesta",country:"Spain",clue:"Spanish midfielder who scored the winning goal in the 2010 World Cup final.",icon:"🇪🇸"},
+  {sport:"football",name:"Zlatan Ibrahimović",country:"Sweden",clue:"Swedish striker famous for acrobatic goals and his larger-than-life personality.",icon:"🇸🇪"},
+  {sport:"football",name:"Gareth Bale",country:"Wales",clue:"Welsh winger who won multiple Champions League titles with Real Madrid.",icon:"🏴"},
+  {sport:"football",name:"Alphonso Davies",country:"Canada",clue:"Canadian left-back known for explosive speed and playing for Bayern Munich.",icon:"🇨🇦"},
+  {sport:"football",name:"Tim Cahill",country:"Australia",clue:"Australian forward famous for his headers and World Cup goals.",icon:"🇦🇺"},
+  {sport:"football",name:"Hidetoshi Nakata",country:"Japan",clue:"Japanese midfielder who became one of the first Asian stars in European football.",icon:"🇯🇵"},
+  {sport:"football",name:"Sunil Chhetri",country:"India",clue:"Indian football legend and former national-team captain, among the world's top international goal scorers.",icon:"🇮🇳"},
+  {sport:"football",name:"George Weah",country:"Liberia",clue:"Liberian football icon who won the 1995 Ballon d'Or and later became president.",icon:"🇱🇷"},
+  {sport:"football",name:"Didier Drogba",country:"Côte d’Ivoire",clue:"Ivorian striker remembered for his Chelsea career and decisive Champions League final penalty.",icon:"🇨🇮"},
+  {sport:"football",name:"Samuel Eto'o",country:"Cameroon",clue:"Cameroonian striker who won major trophies with Barcelona and Inter Milan.",icon:"🇨🇲"},
+  {sport:"football",name:"Yaya Touré",country:"Côte d’Ivoire",clue:"Ivorian midfielder who became a Premier League star at Manchester City.",icon:"🇨🇮"},
+  {sport:"football",name:"Luis Suárez",country:"Uruguay",clue:"Uruguayan striker known for his prolific scoring at Liverpool and Barcelona.",icon:"🇺🇾"},
+  {sport:"football",name:"James Rodríguez",country:"Colombia",clue:"Colombian playmaker who won the Golden Boot at the 2014 World Cup.",icon:"🇨🇴"},
+  {sport:"football",name:"Keylor Navas",country:"Costa Rica",clue:"Costa Rican goalkeeper who won three consecutive Champions League titles with Real Madrid.",icon:"🇨🇷"},
+  {sport:"football",name:"Christian Pulisic",country:"United States",clue:"American attacker nicknamed Captain America, who has played for Chelsea and AC Milan.",icon:"🇺🇸"},
+  {sport:"football",name:"Hugo Sánchez",country:"Mexico",clue:"Mexican striker celebrated for spectacular bicycle kicks and his Real Madrid career.",icon:"🇲🇽"},
+  {sport:"football",name:"Gianluigi Buffon",country:"Italy",clue:"Italian goalkeeping legend and 2006 World Cup winner.",icon:"🇮🇹"},
+  {sport:"football",name:"Sadio Mané",country:"Senegal",clue:"Senegalese star who played for Liverpool and Bayern Munich.",icon:"🇸🇳"},
+  {sport:"football",name:"Riyad Mahrez",country:"Algeria",clue:"Algerian winger who helped Leicester City win the Premier League in 2016.",icon:"🇩🇿"},
+  {sport:"football",name:"Pierre-Emerick Aubameyang",country:"Gabon",clue:"Gabonese striker known for his pace and spells at Arsenal and Borussia Dortmund.",icon:"🇬🇦"},
+  {sport:"football",name:"Emmanuel Adebayor",country:"Togo",clue:"Togolese striker who played for Arsenal, Manchester City and Tottenham.",icon:"🇹🇬"},
+  {sport:"football",name:"Park Ji-sung",country:"South Korea",clue:"South Korean midfielder who won the Champions League with Manchester United.",icon:"🇰🇷"},
+  {sport:"football",name:"Ali Daei",country:"Iran",clue:"Iranian striker who held the men's international goals record for many years.",icon:"🇮🇷"},
+  {sport:"football",name:"Sardar Azmoun",country:"Iran",clue:"Iranian forward nicknamed the Iranian Messi by some fans.",icon:"🇮🇷"},
+  {sport:"football",name:"Ryan Giggs",country:"Wales",clue:"Welsh winger who spent his entire senior club career at Manchester United.",icon:"🏴"},
+  {sport:"football",name:"George Best",country:"Northern Ireland",clue:"Northern Irish football icon and Manchester United legend.",icon:"🇬🇧"},
+  {sport:"football",name:"Didier Zokora",country:"Côte d’Ivoire",clue:"Ivorian defensive midfielder who played for Tottenham Hotspur.",icon:"🇨🇮"},
+  // Cricket
+  {sport:"cricket",name:"Sachin Tendulkar",country:"India",clue:"Indian batting legend known as the Master Blaster; first player to score 100 international centuries.",icon:"🇮🇳"},
+  {sport:"cricket",name:"Virat Kohli",country:"India",clue:"Indian batter known for chasing targets and the nickname King Kohli.",icon:"🇮🇳"},
+  {sport:"cricket",name:"MS Dhoni",country:"India",clue:"Former Indian captain known as Captain Cool and for the 2011 World Cup-winning six.",icon:"🇮🇳"},
+  {sport:"cricket",name:"Rohit Sharma",country:"India",clue:"Indian opening batter known for multiple ODI double centuries and the Hitman nickname.",icon:"🇮🇳"},
+  {sport:"cricket",name:"Jasprit Bumrah",country:"India",clue:"Indian fast bowler recognised for his unusual action and deadly yorkers.",icon:"🇮🇳"},
+  {sport:"cricket",name:"Babar Azam",country:"Pakistan",clue:"Pakistan batter known for elegant stroke play and former captaincy.",icon:"🇵🇰"},
+  {sport:"cricket",name:"Wasim Akram",country:"Pakistan",clue:"Pakistani left-arm fast-bowling legend often called the Sultan of Swing.",icon:"🇵🇰"},
+  {sport:"cricket",name:"Shaheen Afridi",country:"Pakistan",clue:"Pakistani left-arm fast bowler known for striking early with the new ball.",icon:"🇵🇰"},
+  {sport:"cricket",name:"Kane Williamson",country:"New Zealand",clue:"New Zealand batter and former captain admired for calm leadership and technique.",icon:"🇳🇿"},
+  {sport:"cricket",name:"Ross Taylor",country:"New Zealand",clue:"New Zealand batter who scored centuries in all three international formats.",icon:"🇳🇿"},
+  {sport:"cricket",name:"Brendon McCullum",country:"New Zealand",clue:"New Zealand wicketkeeper-batter famous for an explosive style and a 2015 Test triple century.",icon:"🇳🇿"},
+  {sport:"cricket",name:"Ricky Ponting",country:"Australia",clue:"Australian captain who led his team to two consecutive men's ODI World Cup titles.",icon:"🇦🇺"},
+  {sport:"cricket",name:"Steve Smith",country:"Australia",clue:"Australian Test batter known for an unusual technique and prolific run scoring.",icon:"🇦🇺"},
+  {sport:"cricket",name:"David Warner",country:"Australia",clue:"Australian left-handed opening batter known for aggressive starts.",icon:"🇦🇺"},
+  {sport:"cricket",name:"Glenn Maxwell",country:"Australia",clue:"Australian all-rounder famous for innovative shots and a remarkable 2023 World Cup double century.",icon:"🇦🇺"},
+  {sport:"cricket",name:"AB de Villiers",country:"South Africa",clue:"South African batter nicknamed Mr 360 for his ability to hit shots all around the ground.",icon:"🇿🇦"},
+  {sport:"cricket",name:"Jacques Kallis",country:"South Africa",clue:"South African all-rounder who scored over 10,000 runs in both Tests and ODIs.",icon:"🇿🇦"},
+  {sport:"cricket",name:"Kagiso Rabada",country:"South Africa",clue:"South African fast bowler known for pace and wicket-taking ability.",icon:"🇿🇦"},
+  {sport:"cricket",name:"Kumar Sangakkara",country:"Sri Lanka",clue:"Sri Lankan wicketkeeper-batter and elegant left-hander with a huge international run tally.",icon:"🇱🇰"},
+  {sport:"cricket",name:"Muttiah Muralitharan",country:"Sri Lanka",clue:"Sri Lankan spin legend and the leading wicket-taker in Test cricket.",icon:"🇱🇰"},
+  {sport:"cricket",name:"Sanath Jayasuriya",country:"Sri Lanka",clue:"Sri Lankan opener who helped revolutionise aggressive batting in ODI cricket.",icon:"🇱🇰"},
+  {sport:"cricket",name:"Shakib Al Hasan",country:"Bangladesh",clue:"Bangladeshi all-rounder who has been ranked among the world's top players.",icon:"🇧🇩"},
+  {sport:"cricket",name:"Mashrafe Mortaza",country:"Bangladesh",clue:"Bangladeshi fast bowler and former national captain.",icon:"🇧🇩"},
+  {sport:"cricket",name:"Chris Gayle",country:"West Indies",clue:"West Indian power-hitter nicknamed the Universe Boss.",icon:"🏝️"},
+  {sport:"cricket",name:"Brian Lara",country:"West Indies",clue:"West Indian batting great who made 400 not out in a Test innings.",icon:"🏝️"},
+  {sport:"cricket",name:"Viv Richards",country:"Antigua and Barbuda",clue:"Legendary West Indian batter famous for dominating fast bowling without a helmet.",icon:"🇦🇬"},
+  {sport:"cricket",name:"Joe Root",country:"England",clue:"English batter known for his consistency and elegant Test-match stroke play.",icon:"🏴"},
+  {sport:"cricket",name:"Ben Stokes",country:"England",clue:"English all-rounder who played a key role in the dramatic 2019 World Cup final.",icon:"🏴"},
+  {sport:"cricket",name:"James Anderson",country:"England",clue:"English swing bowler and one of the most prolific fast bowlers in Test history.",icon:"🏴"},
+  {sport:"cricket",name:"Eoin Morgan",country:"Ireland",clue:"Born in Ireland, he captained England to their first men's ODI World Cup title.",icon:"🇮🇪"},
+  {sport:"cricket",name:"Rashid Khan",country:"Afghanistan",clue:"Afghan leg-spinner known for quick googlies and success in T20 leagues.",icon:"🇦🇫"},
+  {sport:"cricket",name:"Mohammad Nabi",country:"Afghanistan",clue:"Afghan all-rounder and one of the country's early cricket pioneers.",icon:"🇦🇫"},
+  {sport:"cricket",name:"Sandeep Lamichhane",country:"Nepal",clue:"Nepalese leg-spinner who has played in major T20 leagues around the world.",icon:"🇳🇵"},
+  {sport:"cricket",name:"Ajantha Mendis",country:"Sri Lanka",clue:"Sri Lankan mystery spinner famous for the carrom ball.",icon:"🇱🇰"},
+  {sport:"cricket",name:"Paras Khadka",country:"Nepal",clue:"Former Nepal captain who helped the country rise in international cricket.",icon:"🇳🇵"},
+  {sport:"cricket",name:"Curtly Ambrose",country:"Antigua and Barbuda",clue:"Towering West Indian fast-bowling great known for accuracy and bounce.",icon:"🇦🇬"},
+  {sport:"cricket",name:"Shoaib Akhtar",country:"Pakistan",clue:"Pakistani fast bowler nicknamed the Rawalpindi Express.",icon:"🇵🇰"},
+  {sport:"cricket",name:"Morne Morkel",country:"South Africa",clue:"South African fast bowler known for his height and bounce.",icon:"🇿🇦"},
+  {sport:"cricket",name:"Tamim Iqbal",country:"Bangladesh",clue:"Bangladeshi left-handed opening batter and former captain.",icon:"🇧🇩"},
+  {sport:"cricket",name:"Aqib Javed",country:"Pakistan",clue:"Pakistani fast bowler who was part of the 1992 World Cup-winning team.",icon:"🇵🇰"}
+];
+
+let guessMode = "football";
+let guessDeck = [];
+let guessIndex = 0;
+let guessPoints = 0;
+let guessStreak = 0;
+let guessAnswered = false;
+const guessById = id => document.getElementById(id);
+
+function startGuessQuiz(mode) {
+  guessMode = mode;
+  guessDeck = sportsPlayers.filter(p => mode === "mixed" || p.sport === mode)
+    .sort(() => Math.random() - 0.5).slice(0, 10);
+  guessIndex = 0; guessPoints = 0; guessStreak = 0;
+  guessById("guessFeedback").textContent = "";
+  guessById("guessNext").hidden = true;
+  updateGuessStats();
+  showGuessQuestion();
+}
+function updateGuessStats() {
+  const total = guessDeck.length || 10;
+  guessById("guessRound").textContent = `Question ${Math.min(guessIndex + 1, total)} / ${total}`;
+  guessById("guessScore").textContent = `Score: ${guessPoints}`;
+  guessById("guessStreak").textContent = `Streak: ${guessStreak}`;
+}
+function showGuessQuestion() {
+  if (guessIndex >= guessDeck.length) { finishGuessQuiz(); return; }
+  guessAnswered = false;
+  const player = guessDeck[guessIndex];
+  guessById("guessIcon").textContent = player.icon + (player.sport === "football" ? " ⚽" : " 🏏");
+  guessById("guessPrompt").textContent = "Who is this player?";
+  guessById("guessClue").textContent = player.clue;
+  guessById("guessCountry").textContent = "Sport: " + (player.sport === "football" ? "Football" : "Cricket") + " • Country: " + player.country;
+  guessById("guessFeedback").textContent = "";
+  guessById("guessNext").hidden = true;
+  const others = sportsPlayers.filter(p => p.sport === player.sport && p.name !== player.name)
+    .sort(() => Math.random() - 0.5).slice(0, 3);
+  const choices = [...others, player].sort(() => Math.random() - 0.5);
+  const options = guessById("guessOptions");
+  options.replaceChildren();
+  choices.forEach(choice => {
+    const button = document.createElement("button");
+    button.type = "button"; button.className = "guess-option"; button.textContent = choice.name;
+    button.addEventListener("click", () => answerGuess(button, choice.name === player.name, player.name));
+    options.append(button);
+  });
+  updateGuessStats();
+}
+function answerGuess(selected, correct, answer) {
+  if (guessAnswered) return;
+  guessAnswered = true;
+  const buttons = [...guessById("guessOptions").querySelectorAll("button")];
+  buttons.forEach(button => {
+    button.disabled = true;
+    if (button.textContent === answer) button.classList.add("correct");
+  });
+  if (correct) {
+    guessPoints += 10; guessStreak++;
+    guessById("guessFeedback").textContent = "✅ Correct! +10 points";
+  } else {
+    guessStreak = 0; selected.classList.add("wrong");
+    guessById("guessFeedback").textContent = "❌ Not quite! The answer is " + answer + ".";
+  }
+  updateGuessStats();
+  guessById("guessNext").hidden = false;
+}
+function finishGuessQuiz() {
+  guessById("guessPrompt").textContent = "Quiz complete!";
+  guessById("guessIcon").textContent = "🏆";
+  guessById("guessClue").textContent = `You scored ${guessPoints} out of ${guessDeck.length * 10} points.`;
+  guessById("guessCountry").textContent = guessPoints === guessDeck.length * 10 ? "Perfect score! Amazing sports knowledge!" : "Play again and beat your score.";
+  guessById("guessOptions").replaceChildren();
+  guessById("guessFeedback").textContent = "Choose a sport or restart to play another round.";
+  guessById("guessNext").hidden = true;
+  guessById("guessRound").textContent = "Finished";
+}
+guessById("footballMode").addEventListener("click", () => startGuessQuiz("football"));
+guessById("cricketMode").addEventListener("click", () => startGuessQuiz("cricket"));
+guessById("mixedMode").addEventListener("click", () => startGuessQuiz("mixed"));
+guessById("guessNext").addEventListener("click", () => { guessIndex++; showGuessQuestion(); });
+guessById("guessRestart").addEventListener("click", () => startGuessQuiz(guessMode));
+startGuessQuiz("football");
+
+
+function submitScore(){
+  const name=document.getElementById("scoreName").value.trim();
+  const game=document.getElementById("scoreGame").value.trim();
+  const raw=document.getElementById("scoreValue").value;
+  const score=Number(raw);
+  if(!name||!game||raw===""||!Number.isSafeInteger(score)||score<0){alert("Enter a valid player name, game and non-negative whole-number score.");return;}
+  scores.push({name,game,score});
+  scores.sort((a,b)=>b.score-a.score); scores=scores.slice(0,100);
+  safeSet("ftgScores",JSON.stringify(scores));
+  document.getElementById("scoreMessage").textContent="Your score has been saved in this browser.";
+  document.getElementById("scoreValue").value="";
+  renderLeaderboard(); renderStats();
+}
+function renderLeaderboard(){
+  const body=document.getElementById("leaderboardBody"); body.replaceChildren();
+  if(!scores.length){const row=document.createElement("tr");const cell=document.createElement("td");cell.colSpan=4;cell.textContent="No scores submitted yet.";row.append(cell);body.append(row);return;}
+  scores.slice(0,10).forEach((item,index)=>{
+    const row=document.createElement("tr");
+    [index+1,item.name,item.game,item.score].forEach((value,i)=>{
+      const cell=document.createElement("td");cell.textContent=String(value);if(i===0)cell.className="rank";row.append(cell);
+    });body.append(row);
+  });
+}
+function renderStats(){
+  document.getElementById("topScore").textContent=scores.length?scores[0].score:0;
+  document.getElementById("playerCount").textContent=currentUser?"1":"0";
+}
+document.getElementById("submitScoreButton").addEventListener("click",submitScore);
+renderGames();renderLeaderboard();renderStats();
+</script>
+
+<!--
+  AD SETUP:
+  These are display placeholders, not live paid advertisements.
+  To show real Google AdSense ads, first get your site approved.
+  Then replace each .ad-space placeholder with the ad code supplied
+  in your AdSense account (publisher/client ID and ad slot ID).
+-->
+</body>
+</html>
